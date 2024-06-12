@@ -35,21 +35,15 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.AndroidRuntimeException;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
@@ -330,10 +324,13 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         if (MainApp.isClientBrandedPlus()) {
             RestrictionsManager restrictionsManager = (RestrictionsManager) getSystemService(Context.RESTRICTIONS_SERVICE);
             AppConfigManager appConfigManager = new AppConfigManager(this, restrictionsManager.getApplicationRestrictions());
-            webloginUrl = appConfigManager.getBaseUrl(MainApp.isClientBrandedPlus());
+
+            if (!TextUtils.isEmpty(appConfigManager.getBaseUrl(MainApp.isClientBrandedPlus()))) {
+                webloginUrl = appConfigManager.getBaseUrl(MainApp.isClientBrandedPlus()) + WEB_LOGIN;
+            }
         }
 
-        if (webloginUrl != null) {
+        if (!TextUtils.isEmpty(webloginUrl)) {
             webViewLoginMethod = true;
         } else if (getIntent().getBooleanExtra(EXTRA_USE_PROVIDER_AS_WEBLOGIN, false)) {
             webViewLoginMethod = true;
