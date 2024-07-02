@@ -1210,7 +1210,7 @@
     <string name="share_not_allowed_when_file_drop">Resharing is not allowed during secure file drop</string>
 
 
-    <string name="file_name_validator_error_invalid_character">File name contains invalid characters</string>
+    <string name="file_name_validator_error_invalid_character">File name contains invalid characters %s</string>
     <string name="file_name_validator_error_reserved_names">File name is a reserved name</string>
     <string name="file_name_validator_error_ends_with_space_period">File name ends with a space or a period</string>
 </resources>
